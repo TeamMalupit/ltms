@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html class="no-js  page-9999 app-PUBLIC_PORTAL gecko mac js" lang="en-us"><head>
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <title>LTMS Online Portal Login</title>
+  <link rel="stylesheet" href="LTMS%20Online%20Portal%20Login_files/Core.min_002.css" type="text/css">
+<link rel="stylesheet" href="LTMS%20Online%20Portal%20Login_files/Theme-Standard.min.css" type="text/css">
+<link rel="stylesheet" href="LTMS%20Online%20Portal%20Login_files/jquery-ui-apex.min.css" type="text/css">
+
+  <link rel="stylesheet" href="LTMS%20Online%20Portal%20Login_files/font-apex.min.css" type="text/css">
+<link rel="stylesheet" href="LTMS%20Online%20Portal%20Login_files/Core.min.css" type="text/css">
+
+  <style type="text/css">
+body .overlay { 
+  position: fixed;
+  background-color: rgba(0,54,175,.55);
+  width: 100%;
+  height: 100%;
+}
+
+/*footer
+.t-Footer-version {
+  line-height: 69px;
+  padding-left: 19px;
+  padding-top: 6.6px
+}
+
+.footer-mid-logo {
+  float:left;
+  width:150px;
+}
+
+footer.t-Footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  margin-bottom: -108px;"  
+}*/
+</style>
+
+  <link rel="stylesheet" href="LTMS%20Online%20Portal%20Login_files/38110691971776138.css" type="text/css">
+
+  <link rel="stylesheet" href="LTMS%20Online%20Portal%20Login_files/public_portal_min.css" type="text/css">
+<link rel="stylesheet" href="LTMS%20Online%20Portal%20Login_files/fixes.css" type="text/css">
+<link rel="stylesheet" href="LTMS%20Online%20Portal%20Login_files/websocket_server_min.css" type="text/css">
+<link rel="stylesheet" href="LTMS%20Online%20Portal%20Login_files/digital_id_min.css" type="text/css">
+
+  <style type="text/css">
+html, body {
+  height: 100%;
+}
+#wwvFlowForm {
+  min-height:100%;
+}
+
+.t-Body {
+  background-image: url(LTMS Online Portal Login_files/bg_tools.jpg);
+  background-size: cover;
+}
+
+
+.t-Login-logo {
+    line-height: 25px;
+    text-align: center;
+    font-size: 22px; 
+    width:100% !important;
+}
+
+.t-Login-region { 
+	background-color: #f8f8f8;
+}
+
+.t-Login-body input{
+    background-color: #f5ffff;
+}
+
+.t-Login-region {
+    border-radius: 4px !important; 
+}
+.lto-logo{    
+    background-image: url('LTMS Online Portal Login_files/lto_logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.t-Login-logo{
+height:175px !important;
+}
+
+.login-float-left {
+  width: 200px;
+  float: left !important;
+  padding: 6px 0px;
+}
+
+.login-float-right {
+  float: right;
+}
+
+#btn-forgot-pwd, #btn-unlock-account-failed-login, #btn-unlock-account-idle {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.t-Body {
+  margin-top:65px !important;
+}
+
+/*Error Notification*/
+/*generally hide it and only fade it in if needed, to disguise the blinking*/
+#APEX_ERROR_MESSAGE {
+  display:none;
+  font-size: 15px;
+}
+
+.a-Notification-item.htmldbStdErr{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.a-Notification-item.htmldbStdErr {
+  font-size: 15px;
+}
+
+.a-Notification-title.aErrMsgTitle {
+  display:none;
+}
+
+/*Successs message*/
+#APEX_SUCCESS_MESSAGE {
+  display: none;
+}
+
+#APEX_SUCCESS_MESSAGE .t-Alert-title {
+  color: white;
+  font-size: 16px;
+  line-height: 2rem;
+}
+
+/*remove link outline border after clickig it*/
+.t-Button:focus:before, .a-Button:focus:before, .ui-button:focus:before, .t-Button.is-active:focus:before, .a-Button.is-active:focus:before, .ui-button.is-active:focus:before {
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+.a-Button:focus:after, .t-Button:focus:after, .ui-button:focus:after, .a-Button:not(.t-Button--link):hover:after, .t-Button:not(.t-Button--link):hover:after, .ui-button:not(.t-Button--link):hover:after {
+  opacity: 0;
+}
+
+/*password reveal*/
+.password ~ .t-Form-itemText.t-Form-itemText--post {
+position: absolute;
+  right: 7px;
+ 	 top: 1.6px;
+  z-index: 100;
+}
+
+.reveal-icon {
+  font-size:22px;
+  padding:8px;
+  color: rgb(62,62,62);
+  cursor: pointer;
+}
+
+::-ms-reveal {
+  display:none;
+}
+
+@media screen and (max-width: 768px) {
+  #APEX_ERROR_MESSAGE {
+    top: -15px !important;
+  }
+}
+
+</style>
+
+  <link rel="shortcut icon" href="https://portal.lto.gov.phLTMS Online Portal Login_files/favicon.ico">
+<link rel="icon" sizes="16x16" href="https://portal.lto.gov.phLTMS Online Portal Login_files/favicon.ico">
+<link rel="icon" sizes="32x32" href="https://portal.lto.gov.phLTMS Online Portal Login_files/favicon.ico">
+<link rel="apple-touch-icon" sizes="64x64" href="https://portal.lto.gov.phLTMS Online Portal Login_files/favicon.ico">
+  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="-1"><meta http-equiv="Cache-Control" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="t-PageBody--login apex-top-nav apex-icons-fontapex t-PageBody--topNav">
+<form action="wwv_flow.accept" method="post" name="wwv_flow" id="wwvFlowForm" novalidate="" autocomplete="off">
+<input type="hidden" name="p_flow_id" value="1200" id="pFlowId"><input type="hidden" name="p_flow_step_id" value="9999" id="pFlowStepId"><input type="hidden" name="p_instance" value="111429506694395" id="pInstance"><input type="hidden" name="p_page_submission_id" value="257933214469619632674809130327447468043" id="pPageSubmissionId"><input type="hidden" name="p_request" value="" id="pRequest"><input type="hidden" name="p_reload_on_submit" value="A" id="pReloadOnSubmit"><input type="hidden" value="257933214469619632674809130327447468043" id="pSalt">
+<header class="t-Header" id="t_Header">
+  <div class="t-Header-branding">
+    <div class="t-Header-controls">
+      <button class="t-Button t-Button--icon t-Button--header t-Button--headerTree" title="Expand / Collapse Navigation" id="t_Button_navControl" type="button"><span class="t-Icon fa fa-bars" aria-hidden="true"></span></button>
+    </div>
+    <div class="t-Header-logo">
+      <a href="https://portal.lto.gov.ph/ords/f?p=1200:HOME::::::" class="t-Header-logo-link"><img src="LTMS%20Online%20Portal%20Login_files/lto_logo.png" style="float:left;"></a>
+    </div>
+    <div class="t-Header-navBar">
+      <ul class="t-NavigationBar " id="69964099393747305"><li class="t-NavigationBar-item ">
+  <a class="t-Button t-Button--icon t-Button--header t-Button--navBar" href="javascript:void(window.open('https://lto.gov.ph/'));">
+    <span class="t-Icon fa fa-cloud"></span><span class="t-Button-label">LTO Official Webpage</span><span class="t-Button-badge"></span>
+  </a>
+</li><li class="t-NavigationBar-item ">
+  <button class="t-Button t-Button--icon t-Button t-Button--header t-Button--navBar js-menuButton" type="button" id="L69964099393747307" data-menu="menu_L69964099393747307" aria-haspopup="true" aria-expanded="false">
+      <span class="t-Icon fa fa-graduation-cap"></span><span class="t-Button-label">E-Learning</span><span class="t-Button-badge"></span><span class="a-Icon icon-down-arrow"></span>
+  </button></li><li class="t-NavigationBar-item ">
+  <a class="t-Button t-Button--icon t-Button--header t-Button--navBar" href="https://portal.lto.gov.ph/ords/f?p=PUBLIC_PORTAL:CONTACT_US:111429506694395:::::">
+    <span class="t-Icon fa fa-phone"></span><span class="t-Button-label">Contact</span><span class="t-Button-badge"></span>
+  </a>
+</li><li class="t-NavigationBar-item ">
+  <a class="t-Button t-Button--icon t-Button--header t-Button--navBar" href="https://portal.lto.gov.ph/ords/f?p=PUBLIC_PORTAL:TERMS_AND_CONDITIONS:111429506694395:::::">
+    <span class="t-Icon fa fa-user-plus"></span><span class="t-Button-label">Register</span><span class="t-Button-badge"></span>
+  </a>
+</li><li class="t-NavigationBar-item ">
+  <a class="t-Button t-Button--icon t-Button--header t-Button--navBar" href="https://portal.lto.gov.ph/ords/f?p=1200:LOGIN_DESKTOP:111429506694395:::9999::&amp;cs=3J0FnFOOibV9zCBv75JfyZ2CF5Nk4TGbLIFYIOmd-gWwm66_rBgqc5p3JyWwHtsLnp-rA9l1ZLOJfbZy1x1fS1g">
+    <span class="t-Icon fa fa-user"></span><span class="t-Button-label">Login</span><span class="t-Button-badge"></span>
+  </a>
+</li></ul>
+    </div>
+  </div>
+</header>    <div class="t-Body">
+  
+  <span id="APEX_SUCCESS_MESSAGE" data-template-id="84385487787009907_S" class="apex-page-success u-hidden"></span><span id="APEX_ERROR_MESSAGE" data-template-id="84385487787009907_E" class="apex-page-error u-hidden"></span>
+  <div class="t-Body-wrap">
+    <div class="t-Body-col t-Body-col--main">
+      <div class="t-Login-container">
+        <div class="container">
+<div class="row">
+<div class="col col-12 apex-col-auto">
+<div id="R84675782609529815" class=""> 
+<input type="hidden" id="P0_CANCEL_TEXT" name="P0_CANCEL_TEXT" value="Do you really want to Cancel?&lt;br&gt;All entered data will be deleted permanently."><input type="hidden" data-for="P0_CANCEL_TEXT" value="gB0tc6DWS4xNmRg5khgtXAoqEC5o52FxPEmD60hqY10-AvFjfIHs7T5-eBfUg1is5FHv-ElYBgUvPYgk1pjVVQ"><input type="hidden" id="P0_WSS_JSON" name="P0_WSS_JSON" value="eyJjb2RlIjoiTk9UX0lOU1RBTExFRCIsIm1zZyI6IlRoZSB3ZWJzb2NrZXQgc2Vy
+dmVyIGlzIGVpdGhlciBub3QgaW5zdGFsbGVkIG9yIG5vdCBydW5uaW5nLiIsIm9m
+ZmljZV9uYW1lIjpudWxsLCJ3c3NfdmVyc2lvbiI6bnVsbCwib2ZmaWNlX2NvZGUi
+Om51bGwsIndzc19zdGF0ZSI6bnVsbCwiY29tcHV0ZXJfdHlwZSI6IiIsIndzc19s
+aW5rIjpudWxsfQ=="><input type="hidden" id="P0_WMT_D" name="P0_WMT_D" value=""><input type="hidden" data-for="P0_WMT_D" value="LIOjryWJb0_UYjpm7cYzOP9EK4TtCgBdWzBmFA5n5ZCSfyzFflAI6HrPC9IjE5phXm_P0bKDdq1Xg5zaiEEMLQ"><input type="hidden" id="P0_WMA_D" name="P0_WMA_D" value=""><input type="hidden" data-for="P0_WMA_D" value="E6n5yVd6Hhbe-it9wtnisMKibijOYIk7qeLVhHx-BpEManTdk71RoKhUOJUaYCiVT88h3RQgb4ROM2DGjeeknw"><input type="hidden" id="P0_WMD_D" name="P0_WMD_D" value=""><input type="hidden" data-for="P0_WMD_D" value="NwoLIvpoGCeJuRpIw_gcgUjt-c_Pz_U2QUXhpgN-cl2_43siyRo2Adw6r_F6T1PWDzaKkRQG5dhQyvYbVs-k0w"><input type="hidden" id="P0_WMR_D" name="P0_WMR_D" value=""><input type="hidden" data-for="P0_WMR_D" value="87EnnVJmQwQRrb22o3Gw3vJ3s3mOm-AAcl7Eox7EzRiTjqqP4FX4HqFyqHtkgSyqqTO_zeMaWjwpg0vtfxGI-Q"><input type="hidden" id="P0_W_DLS_DONE" name="P0_W_DLS_DONE" value=""><input type="hidden" data-for="P0_W_DLS_DONE" value="UHib-5TQJ_2zweKwsJQTpHXviR0RwqZpvuJIJCfZ3Of1fv0XWi_3M3IxmwxOGZ62p172-NdLuBwArF1HU7uoWg"><input type="hidden" id="P0_W_RESC_APPO_DONE" name="P0_W_RESC_APPO_DONE" value=""><input type="hidden" data-for="P0_W_RESC_APPO_DONE" value="Xn1N-bBNL13SJPwU25n4Ou2dXcZM1s3SXCFLSUw6YzOYQdAJLOCuszF7f4HBQk2_3TSHMIlEI0Ji83TrT0HvGQ"><script>
+  const logoutObj = {
+    reloadUrl4Idle : `${location.protocol}/${location.host}/ords/apex_authentication.logout?p_app_id=1200&p_session_id=111429506694395`
+  , reloadUrl4Life : `${location.protocol}/${location.host}/ords/apex_authentication.logout?p_app_id=1200&p_session_id=111429506694395`
+  };
+</script>
+</div>
+</div>
+</div><div class="row">
+<div class="col col-12 apex-col-auto">
+<div class="t-Login-region t-Form--stretchInputs t-Form--labelsAbove " id="R32767896616544951">
+  <div class="t-Login-header">
+    <span class="t-Login-logo lto-logo"></span>
+    <h1 class="t-Login-title" id="R32767896616544951_heading"><b>LTMS PORTAL</b><br><center><h4>Land Transportation Management System</h4></center></h1>
+  </div>
+  <div class="t-Login-body">
+    <div class="t-Form-fieldContainer t-Form-fieldContainer--hiddenLabel rel-col  apex-item-wrapper apex-item-wrapper--text-field apex-item-wrapper--has-icon" id="P9999_USERNAME_CONTAINER"><div class="t-Form-labelContainer t-Form-labelContainer--hiddenLabel col col-null">
+<label for="P9999_USERNAME" id="P9999_USERNAME_LABEL" class="t-Form-label u-VisuallyHidden">LTO Client Number</label>
+</div><div class="t-Form-inputContainer col col-null"><div class="t-Form-itemWrapper"><input type="text" id="P9999_USERNAME" name="P9999_USERNAME" placeholder="Email or LTO Client Number" class="text_field apex-item-text apex-item-has-icon" size="40" maxlength="100"><span class="apex-item-icon fa fa-user" aria-hidden="true"></span></div><span id="P9999_USERNAME_error_placeholder" class="a-Form-error" data-template-id="32741443991544493_ET"></span></div></div><div class="t-Form-fieldContainer t-Form-fieldContainer--hiddenLabel rel-col  apex-item-wrapper apex-item-wrapper--password apex-item-wrapper--has-icon" id="P9999_PASSWORD_CONTAINER"><div class="t-Form-labelContainer t-Form-labelContainer--hiddenLabel col col-null">
+<label for="P9999_PASSWORD" id="P9999_PASSWORD_LABEL" class="t-Form-label u-VisuallyHidden">Password</label>
+</div><div class="t-Form-inputContainer col col-null"><div class="t-Form-itemWrapper"><input type="password" name="P9999_PASSWORD" size="40" maxlength="100" value="" id="P9999_PASSWORD" placeholder="PASSWORD" class="password apex-item-text apex-item-has-icon" style="text-transform:none !important" onkeypress="return apex.submit({request:'P9999_PASSWORD',submitIfEnter:event})"><span class="apex-item-icon fa fa-key" aria-hidden="true"></span><span class="t-Form-itemText t-Form-itemText--post"><span aria-hidden="true" class="fa fa-eye-slash reveal-icon"></span></span></div><span id="P9999_PASSWORD_error_placeholder" class="a-Form-error" data-template-id="32741443991544493_ET"></span></div></div><div class="t-Form-fieldContainer t-Form-fieldContainer--hiddenLabel rel-col login-float-left apex-item-wrapper apex-item-wrapper--checkbox " id="P9999_REMEMBER_CONTAINER"><div class="t-Form-labelContainer t-Form-labelContainer--hiddenLabel col col-null">
+<label for="P9999_REMEMBER" id="P9999_REMEMBER_LABEL" class="t-Form-label u-VisuallyHidden">Remember Username</label>
+</div><div class="t-Form-inputContainer col col-null"><div class="t-Form-itemWrapper"><div tabindex="-1" id="P9999_REMEMBER" aria-labelledby="P9999_REMEMBER_LABEL" class="checkbox_group apex-item-group apex-item-group--rc apex-item-checkbox" role="group">
+<div class="apex-item-option"><input type="checkbox" id="P9999_REMEMBER_0" name="P9999_REMEMBER" value="Y"><label for="P9999_REMEMBER_0">Remember Username</label></div>
+</div>
+</div><span id="P9999_REMEMBER_error_placeholder" class="a-Form-error" data-template-id="32741443991544493_ET"></span></div></div><button onclick="void(0);" class="t-Button login-float-right  t-Button--link" type="button" id="btn-forgot-pwd"><span class="t-Button-label">Forgot Password</span></button><input type="hidden" id="P9999_REAL_USERNAME" name="P9999_REAL_USERNAME" value=""><input type="hidden" data-for="P9999_REAL_USERNAME" value="2PZh0ORw7EzZ2kI4sBrl1dmkmyMZMs4sEDYRiJdbC9LN5969ofl1xG6gQz7emoib6d0xQlRVYFX_qz4vIJwdQA"><input type="hidden" id="P9999_ERROR_CODE" name="P9999_ERROR_CODE" value=""><input type="hidden" data-for="P9999_ERROR_CODE" value="F6RLrqKrFG3hNBfysyNnibFGAi4uT2373IlFrphPjHlTnLI0bWvoV5WI1eoXRE2devMLsF_mg-rsEV70eTcWCg"><input type="hidden" id="P9999_VERIFICATION_NUMBER" name="P9999_VERIFICATION_NUMBER" value=""><input type="hidden" data-for="P9999_VERIFICATION_NUMBER" value="3NWPE6NqD0F7J12HAh_qrNHYxo5Dlu9HS1DIm8n98sG_YVNGg-Mx_aqIlVcJbL1_e4nLz849PZGX_KN4HC9JhQ"><input type="hidden" id="P9999_LINK_VERIFICATION_CODE" name="P9999_LINK_VERIFICATION_CODE" value=""><input type="hidden" data-for="P9999_LINK_VERIFICATION_CODE" value="LtpmWiTkGyK4so_MZMkVxU4l3yKuhaaTyulUhsJYEqq4kaOYdzAHaeKVBzVpWb6Tchbe41NNMaYKMEbWd3TCjA"><input type="hidden" id="P9999_POPUP_TITLE" name="P9999_POPUP_TITLE" value="Change Password"><input type="hidden" data-for="P9999_POPUP_TITLE" value="-OUkYPiyT5TdLT3MtCSQUZlPz9f76EuR0-wVh5h9c3MwBkAfeHuzlBVTiJzYKXSQl4eYYFIdOILXAcvRnR4tTQ"><input type="hidden" id="P9999_AFTER_LOGIN_PAGE" name="P9999_AFTER_LOGIN_PAGE" value="DASHBOARD"><input type="hidden" data-for="P9999_AFTER_LOGIN_PAGE" value="KDEGhM3zuwIZq4224-ryXtlXVH1R7Y4QNCJo046qDUXA3j8r52dEbxPhUKXUxl-Tx3zHjGLDOomh1S0-AmYZIg">
+  </div>
+  <div class="t-Login-buttons">
+    <a href="dashboard.html">
+      <button class="t-Button t-Button--hot " type="button" id="btn-login"><span class="t-Button-label">Sign In</span></button>
+    </a>
+    
+  </div>
+  <div class="t-Login-links">
+    
+  </div>
+  
+</div>
+</div>
+</div><div class="row">
+<div class="col col-12 apex-col-auto">
+<div id="reg-digital-id_parent">
+<div style="display:none"></div>
+</div>
+</div>
+</div><div class="row">
+<div class="col col-12 apex-col-auto">
+<div id="reg-print-document_parent">
+<div style="display:none"></div>
+</div>
+</div>
+</div>
+</div>
+      </div>
+     <div class="mid-logo-container">
+          <img src="LTMS%20Online%20Portal%20Login_files/lto_mid_logo_white_small.png">;
+        </div>   
+    </div>
+  </div>
+</div><input type="hidden" id="pPageItemsRowVersion" value=""><input type="hidden" id="pPageItemsProtected" value="7pkTcXaL5I07V4v9ws2Jei_ut2JN1_TevhbrkDGt_s4eRcSL13A0z9qMcvFZ-1cYWb-C7WgZ_CXKAGSPSlV2_QdpkAMmvBnPNpmqVM5PxMmnqaWoPbc9v1h6aTtJpGcnkIBDR_05YEwhbVKoW5ezkiyJgapoqC--uLopClRIgTYAMswQJrRuI5NPMyOJ7owEnDphIaf4s_WTzr7gYcWURSzW-3J4zriYAZM_14_USJKLWnafpgUyTrG4AeSPN4bjc1ZNSuXaUvnIlKXQWr-uoS9KTGHCo-ZsJFnm_swr50E"></form>
+
+
+<script>
+var apex_img_dir = "/i/", htmldb_Img_Dir = apex_img_dir;
+</script>
+<script src="LTMS%20Online%20Portal%20Login_files/desktop_all.min.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/wwv_flow.js"></script>
+
+<script type="text/javascript">
+apex.da.initDaEventList = function(){
+apex.da.gEventList = [
+{"bindEventType":"ready","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ dermalog.dl_a_public_portal.websocketServer.register(
+  false,  //forceUpdate
+  false,   //showWSSIconAlways
+  true,   //showTypeText, 
+  true,   //showIssueText, 
+  true,   //showOfficeNameText
+);
+},"action":"NATIVE_JAVASCRIPT_CODE"}]},
+{"bindEventType":"ready","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ // set session timeout to logout url
+//dermalog.dl_common.sessionTimeoutObserver.Init(true, {});
+
+// set session timeout to logout url
+dermalog.dl_common.sessionTimeoutObserver.Init(true, logoutObj);
+},"action":"NATIVE_JAVASCRIPT_CODE"}]},
+{"bindEventType":"ready","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ dermalog.dl_a_public_portal.digital_id.initDigitlIdModal(``);
+},"action":"NATIVE_JAVASCRIPT_CODE"}]},
+{"triggeringElementType":"ITEM","triggeringElement":"P9999_PASSWORD","bindType":"bind","bindEventType":"keyup","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ //RETURN key
+if (this.browserEvent.originalEvent.keyCode == 13) {
+  apex.submit({request : "LOGIN"/*, showWait : true*/});
+}
+
+},"action":"NATIVE_JAVASCRIPT_CODE"}]},
+{"triggeringElementType":"BUTTON","triggeringButtonId":"btn-forgot-pwd","bindType":"bind","bindEventType":"apexafterclosedialog","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,"waitForResult":true,"affectedElementsType":"ITEM","affectedElements":"P9999_USERNAME",javascriptFunction:apex.da.setValue,"ajaxIdentifier":"gnYWZKzHcb2QOGXIlwU6hM2OwOkKv15fUmYG9FlRoGs","attribute01":"DIALOG_RETURN_ITEM","attribute09":"N","attribute10":"P9997_USERNAME","action":"NATIVE_SET_VALUE"},{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ apex.submit({request : "FORGOT_PASSWORD", showWait : true});
+},"action":"NATIVE_JAVASCRIPT_CODE"}]},
+{"triggeringElementType":"BUTTON","triggeringButtonId":"btn-unlock-account-failed-login","bindType":"bind","bindEventType":"apexafterclosedialog","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,"waitForResult":true,"affectedElementsType":"ITEM","affectedElements":"P9999_USERNAME",javascriptFunction:apex.da.setValue,"ajaxIdentifier":"7kJaKaY1aEOrsubpzaIKLfWcdh0yVpj8bct0paqa7O0","attribute01":"DIALOG_RETURN_ITEM","attribute09":"N","attribute10":"P9997_USERNAME","action":"NATIVE_SET_VALUE"},{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ apex.submit({request : "UNLOCK_ACCOUNT_FAILED_LOGIN", showWait : true});
+},"action":"NATIVE_JAVASCRIPT_CODE"}]},
+{"triggeringElementType":"BUTTON","triggeringButtonId":"btn-unlock-account-idle","bindType":"bind","bindEventType":"apexafterclosedialog","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ apex.submit({request : "UNLOCK_ACCOUNT_IDLE", showWait : true});
+},"action":"NATIVE_JAVASCRIPT_CODE"},{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,"waitForResult":true,"affectedElementsType":"ITEM","affectedElements":"P9999_USERNAME",javascriptFunction:apex.da.setValue,"ajaxIdentifier":"k-JFgcENawdCRbuPAkk8eZAyE4omL7G-NzZTJzfpuLA","attribute01":"DIALOG_RETURN_ITEM","attribute09":"N","attribute10":"P9997_USERNAME","action":"NATIVE_SET_VALUE"}]},
+{"triggeringElementType":"BUTTON","triggeringButtonId":"btn-forgot-pwd","bindType":"bind","bindEventType":"click","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ wp = apex.util.showSpinner();
+
+apex.server.process(
+  'createModalLink',                             
+  {x01: apex.item("P9999_USERNAME").getValue(),
+   x02: '#btn-forgot-pwd',
+   x03: 'FORGOT_PASSWORD'
+  },
+  {
+    success: function (pData) {
+      wp.remove();
+      apex.navigation.redirect(pData);
+    },
+    dataType: "text"
+  }
+);
+},"action":"NATIVE_JAVASCRIPT_CODE"}]},
+{"triggeringElementType":"BUTTON","triggeringButtonId":"btn-unlock-account-failed-login","bindType":"bind","bindEventType":"click","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ wp = apex.util.showSpinner();
+
+apex.server.process(
+  'createModalLink',                             
+  {x01: apex.item("P9999_USERNAME").getValue(),
+   x02: '#btn-unlock-account-failed-login',
+   x03: 'UNLOCK_ACCOUNT_FAILED_LOGIN',
+   x04:  apex.item("P9999_REAL_USERNAME").getValue()
+  },
+  {
+    success: function (pData) {
+      wp.remove();
+      apex.navigation.redirect(pData);
+    },
+    dataType: "text"
+  }
+);
+},"action":"NATIVE_JAVASCRIPT_CODE"}]},
+{"triggeringElementType":"BUTTON","triggeringButtonId":"btn-unlock-account-idle","bindType":"bind","bindEventType":"click","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ wp = apex.util.showSpinner();
+
+apex.server.process(
+  'createModalLink',                             
+  {x01: apex.item("P9999_USERNAME").getValue(),
+   x02: '#btn-unlock-account-idle',
+   x03: 'UNLOCK_ACCOUNT_IDLE',
+   x04:  apex.item("P9999_REAL_USERNAME").getValue()
+  },
+  {
+    success: function (pData) {
+      wp.remove();
+      apex.navigation.redirect(pData);
+    },
+    dataType: "text"
+  }
+);
+},"action":"NATIVE_JAVASCRIPT_CODE"}]}];
+}
+</script>
+
+<script src="LTMS%20Online%20Portal%20Login_files/widget.stickyWidget.min.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/theme42.min.js"></script>
+
+
+<script src="LTMS%20Online%20Portal%20Login_files/browser_detect.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/add_icon.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/namespaces_002.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/namespaces_003.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/utils.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/namespaces.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/apps.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/namespace.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/namespace_003.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/page_min.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/messages_min.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/websocket_server_min.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/qrcode.min.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/digital_id_min.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/documents_min.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/namespace_002.js"></script>
+<script src="LTMS%20Online%20Portal%20Login_files/dms_min.js"></script>
+
+<script type="text/javascript">
+const disableLoginBtnOnWaiting = function() {
+  
+  if($('#apex_login_throttle_sec').length > 0){
+    $('#btn-login').attr('disabled','disabled')
+  
+    const waitHandle = setInterval(()=> {
+      if($('#apex_login_throttle_sec').length == 0) {
+        $('#btn-login').removeAttr('disabled','disabled')
+        clearInterval(waitHandle);
+      }
+    }, 200)
+  }
+};
+
+//var myJson;
+function isEmpty(val){
+    return (val === undefined || val == null || val.length <= 0) ? true : false;
+};
+
+// create error message and success messages
+function messageHandling(errorCode) {
+  switch(errorCode) {
+    case 'NO_CREDENTIALS':
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break;
+    case 'INVALID_CREDENTIALS':
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break;  
+    case 'NO_USERNAME': 
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break;
+    case 'NO_PASSWORD': 
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break;
+    case 'TOO_MANY_FAILED_LOGINS':
+      apex.message.showErrors([
+      {
+        type:       "error",
+        location:   "page",
+        pageItem:   "",
+        message:    "<b>Your account has now been locked for security purposes.</b><br>Please click \"Unlock Account\"",
+        unsafe:     false
+      }
+      ]);
+      $("#APEX_ERROR_MESSAGE ").fadeIn(500);
+      break;
+    case 'PWD_VERIFICATION_FAILED':
+      apex.message.showErrors([
+      {
+        type:       "error",
+        location:   "page",
+        pageItem:   "",
+        message:    "<b>The link sent in your email is no longer valid.</b>",
+        unsafe:     false
+      }
+      ]);
+      $("#APEX_ERROR_MESSAGE ").fadeIn(500);
+      break;  
+
+    case 'IS_VERIFIED':
+      apex.message.showErrors([
+      {
+        type:       "error",
+        location:   "page",
+        pageItem:   "",
+        message:    "You have already been verified.",
+        unsafe:     false
+      }
+      ]);
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break;    
+
+    case 'VERIFICATION_NUMBER_IS_WRONG':
+      apex.message.showErrors([
+      {
+        type:       "error",
+        location:   "page",
+        pageItem:   "",
+        message:    "<b>Your verification link was manipulated.</b><br>You can not be verified.",
+        unsafe:     false
+      }
+      ]);
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break; 
+
+    case 'CLIENT_NOT_FOUND':
+      apex.message.showErrors([
+      {
+        type:       "error",
+        location:   "page",
+        pageItem:   "",
+        message:    "<b>The link sent in your email is no longer valid.</b>",
+        unsafe:     false
+      }
+      ]);
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break; 
+
+    case 'LOCKED':
+      apex.message.showErrors([
+      {
+        type:       "error",
+        location:   "page",
+        pageItem:   "",
+        message:    "<b>Too much account idle time.</b><br>Please click \"Unlock Account\" to receive a reactivation email.",
+        unsafe:     false
+      }
+      ]);
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break;   
+
+    case 'TIMEOUT':
+      apex.message.showErrors([
+      {
+        type:       "error",
+        location:   "page",
+        pageItem:   "",
+        message:    "<b>Your session has expired.</b>",
+        unsafe:     false
+      }
+      ]);
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break;  
+      
+    case 'AGE_BLOCKED_DURING_ECQ':
+      apex.message.showErrors([
+      {
+        type:       "error",
+        location:   "page",
+        pageItem:   "",
+        message:    "<b>ECQ transaction policy.</b><br>Your age is not between 21 and 60 and therefore no transactions are allowed for you during ECQ.",
+        unsafe:     false
+      }
+      ]);
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break;        
+      
+
+    case 'REACTIVATE':
+      apex.message.showPageSuccess('<b>Your account was reactivated.</b>');
+      $("#APEX_SUCCESS_MESSAGE").fadeIn(500);
+      break;      
+      
+    case 'ACCOUNT_UNLOCKED':
+      apex.message.showPageSuccess('<b>Your account was unlocked.</b>');
+      $("#APEX_SUCCESS_MESSAGE").fadeIn(500);
+      break;            
+
+    case 'FORGOT_PWD':
+      apex.message.showPageSuccess('<b>A password change link has been sent to your email.</b>');
+      $("#APEX_SUCCESS_MESSAGE").fadeIn(500);
+      break;
+
+    case 'UNLOCK_ACCOUNT':
+      apex.message.showPageSuccess('<b>A link to unlock your account has been sent to your email.</b>');
+      $("#APEX_SUCCESS_MESSAGE").fadeIn(500);
+      break;    
+
+    case 'PWD_CHANGED':
+      apex.message.showPageSuccess('<b>You have successfully set a new password.</b><br>You may now log in using your new password.');
+      $("#APEX_SUCCESS_MESSAGE").fadeIn(500);
+      break;
+
+    case 'HAS_BEEN_VERIFIED':  
+      apex.message.showPageSuccess('<b>Your account has been verified and confirmed.</b><br><span style="font-size:15.2px">Type in your new password to log in.</span>');
+      $("#APEX_SUCCESS_MESSAGE").fadeIn(500);
+      break;    
+
+    case 'ACCOUNT_REACTIVATED':  
+      apex.message.showPageSuccess('<b>Your account was reactivated.</b>');
+      $("#APEX_SUCCESS_MESSAGE").fadeIn(500);
+      break;        
+
+    case 'LOGIN_BLOCKED' :
+      $("#APEX_ERROR_MESSAGE").fadeIn(500);
+      break;
+          
+    case 'EMAIL_VERIFIED':  
+      apex.message.showPageSuccess('<b>Your email was verified.</b>');
+      $("#APEX_SUCCESS_MESSAGE").fadeIn(500);
+      break;   
+
+    default:
+      console.log('Unknown errorCode : ' + errorCode);
+  }
+}
+
+</script>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+apex.jQuery( function() {
+apex.page.init( this, function() {
+apex.jQuery.when.apply( apex.jQuery, apex.page.loadingDeferreds ).done(function() {
+try {
+(function(){
+var lTimeoutField = document.getElementById("apex_login_throttle_sec"),
+    lTimeout      = lTimeoutField ? +lTimeoutField.innerHTML : 0;
+if (lTimeout) {
+    var lTimer = window.setInterval (
+        function() {
+            if (lTimeout > 0) {
+                lTimeoutField.innerHTML = lTimeout;
+                lTimeout--;
+            } else {
+                window.clearInterval(lTimer);
+                var lDiv = document.getElementById("apex_login_throttle_div");
+                if (lDiv) {
+                    lDiv.parentNode.removeChild(lDiv);
+                    return true;
+                }
+            }
+        },
+        1000 );
+}})();
+(function(){apex.widget.checkboxAndRadio("#P9999_REMEMBER","checkbox",{"ajaxIdentifier":"fBFJ10tTbvGsgGOntQYR6iSklED7WJZ2IByKNIzBzYjX1rfp9_ZvrEn59CI3IF50","optimizeRefresh":true,"inputName":"P9999_REMEMBER"});})();
+(function(){apex.da.initDaEventList();})();
+(function(){apex.da.init();})();
+apex.theme42.initializePage.appLogin();
+/*try { $.getJSON("https://localhost:2013/ComputerIdentifier",function(json){
+  //console.log(json);
+  //myJson= json;
+  if (isEmpty (json) == false) {
+    apex.item("P9999_COMPUTER_HASH").setValue(json.ComputerID);
+  }
+})
+    }
+catch(err){
+    console.log('service not found');
+}*/
+
+//close error message, when empty
+const closeButtonHandle = setInterval(function(){
+  try {
+    const text = $('.t-Alert-body').html().trim();
+    if(text === "") {
+      $('.t-Button--closeAlert').click()    
+      clearInterval(closeButtonHandle);
+    }
+  } catch(e) {
+    
+  }
+},100)
+
+// password reveal function
+document.querySelectorAll('.reveal-icon')
+        .forEach(elem => 
+          elem.addEventListener("click",e => {
+            const $target = $(e.target);
+            const $pwdInput = $(e.target.parentElement.parentElement).find('input')
+  
+            if($target.hasClass('fa-eye-slash')) {
+              $pwdInput.attr('type','text');
+              $target.removeClass('fa-eye-slash')
+                     .addClass('fa-eye')
+                     .css('color','rgb(0, 54, 175)');  
+              
+            } else {
+              $pwdInput.attr('type','password');
+              $target.removeClass('fa-eye')
+                     .addClass('fa-eye-slash')
+                     .css('color','rgb(62,62,62)');  
+            }
+          })
+       );
+
+disableLoginBtnOnWaiting();
+
+
+
+apex.item( 'P9999_USERNAME' ).setFocus();
+} finally {
+apex.event.trigger(apex.gPageContext$,'apexreadyend');
+}
+});
+});
+});</script>
+
+
+<div style="display: none; position: fixed;" tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog--inline" aria-describedby="reg-digital-id" aria-labelledby="ui-id-1"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix"><span id="ui-id-1" class="ui-dialog-title">Digital ID </span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button></div><div id="reg-digital-id" class="t-DialogRegion js-modal js-dialog-size720x480 js-regionDialog ui-dialog-content ui-widget-content" style="">
+  <div class="t-DialogRegion-wrap">
+    <div class="t-DialogRegion-bodyWrapperOut"><div class="t-DialogRegion-bodyWrapperIn"><div class="t-DialogRegion-body"><div class="container">
+<div class="row" style="display: none;">
+<div class="col col-12 apex-col-auto">
+<div id="reg-digital-id-picture" class=""> 
+<div class="qr-box">
+  <div id="qrcode">
+  </div>
+</div>
+
+<div class="wait-box">
+  <span class="u-Processing custom-spinner" role="alert">
+     <span class="u-Processing-spinner"></span>
+     <div class="spinner-wait-text">LOADING DIGITAL ID</div>
+  </span>
+</div>
+
+<div class="scene license-container">
+  <div class="card">
+    <div class="card__face card__face--front">
+      <canvas id="canvas-front"></canvas>
+    </div>
+    <div class="card__face card__face--back">
+      <canvas id="canvas-back"></canvas>
+    </div>
+  </div>
+</div><table summary="" cellspacing="0" cellpadding="0" border="0" width="100%"><tbody><tr><td align="right"><button class="t-Button t-Button--noLabel t-Button--icon t-Button--link" onclick="void(0);" type="button" id="btn-close-digital-id-ls" title="Close" aria-label="Close"><span class="t-Icon fa fa-times-circle-o fa-2x" aria-hidden="true"></span></button><button class="t-Button t-Button--noLabel t-Button--icon t-Button--link" onclick="void(0);" type="button" id="btn-flip-digital-id-ls" title="Show Backside" aria-label="Show Backside"><span class="t-Icon fa fa-exchange fa-2x" aria-hidden="true"></span></button><button class="t-Button t-Button--noLabel t-Button--icon t-Button--link" onclick="void(0);" type="button" id="btn-qr-digital-id-ls" title="Close" aria-label="Close"><span class="t-Icon fa fa-qrcode fa-2x" aria-hidden="true"></span></button><button class="t-Button t-Button--noLabel t-Button--icon t-Button--link" onclick="void(0);" type="button" id="btn-back-digital-id-ls" title="Close" aria-label="Close"><span class="t-Icon fa fa-chevron-left fa-2x" aria-hidden="true"></span></button></td></tr></tbody></table>
+</div>
+</div>
+</div><div class="row" style="display: none;">
+<div class="col col-12 apex-col-auto">
+<div id="reg-digital-id-list" class=""> 
+<ul class="t-Cards u-colors t-Cards--featured t-Cards--block force-fa-lg t-Cards--displayIcons t-Cards--float t-Cards--desc-2ln t-Cards--animColorFill"></ul>
+</div>
+</div>
+</div><div class="row" style="display: none;">
+<div class="col col-12 apex-col-auto">
+<div class="t-Alert t-Alert--colorBG t-Alert--horizontal t-Alert--defaultIcons t-Alert--info" id="reg-digital-id-error">
+  <div class="t-Alert-wrap">
+    <div class="t-Alert-icon">
+      <span class="t-Icon "></span>
+    </div>
+    <div class="t-Alert-content">
+      <div class="t-Alert-header">
+        <h2 class="t-Alert-title" id="reg-digital-id-error_heading">Digital ID can not be generated</h2>
+      </div>
+      <div class="t-Alert-body"><div class="error-reason">
+</div></div>
+    </div>
+    <div class="t-Alert-buttons"></div>
+  </div>
+</div>
+</div>
+</div>
+</div></div></div></div>
+    <div class="t-DialogRegion-buttons">
+       <div class="t-ButtonRegion t-ButtonRegion--dialogRegion">
+         <div class="t-ButtonRegion-wrap">
+           <div class="t-ButtonRegion-col t-ButtonRegion-col--left"><div class="t-ButtonRegion-buttons"><button class="t-Button t-Button--noLabel t-Button--icon " onclick="void(0);" type="button" id="btn-back-digital-id" title="Back" aria-label="Back"><span class="t-Icon fa fa-chevron-left" aria-hidden="true"></span></button><button onclick="void(0);" class="t-Button t-Button--danger" type="button" id="btn-close-digital-id"><span class="t-Button-label">Close</span></button></div></div>
+           <div class="t-ButtonRegion-col t-ButtonRegion-col--right"><div class="t-ButtonRegion-buttons"><button class="t-Button t-Button--icon t-Button--iconLeft t-Button--hot" onclick="void(0);" type="button" id="btn-flip-digital-id"><span class="t-Icon t-Icon--left fa fa-exchange" aria-hidden="true"></span><span class="t-Button-label">Show Backside</span><span class="t-Icon t-Icon--right fa fa-exchange" aria-hidden="true"></span></button><button class="t-Button t-Button--icon t-Button--iconLeft t-Button--hot" onclick="void(0);" type="button" id="btn-qr-digital-id"><span class="t-Icon t-Icon--left fa fa-qrcode" aria-hidden="true"></span><span class="t-Button-label">QR Code</span><span class="t-Icon t-Icon--right fa fa-qrcode" aria-hidden="true"></span></button></div></div>
+         </div>
+       </div>
+    </div>
+  </div>
+</div></div><div style="display: none; position: fixed;" tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog--inline" aria-describedby="reg-print-document" aria-labelledby="ui-id-2"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix"><span id="ui-id-2" class="ui-dialog-title">Print Document</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button></div><div id="reg-print-document" class="t-DialogRegion js-modal js-dialog-size720x480 js-regionDialog ui-dialog-content ui-widget-content" style="">
+  <div class="t-DialogRegion-wrap">
+    <div class="t-DialogRegion-bodyWrapperOut"><div class="t-DialogRegion-bodyWrapperIn"><div class="t-DialogRegion-body"><input type="hidden" id="P0_DOC_LINK" name="P0_DOC_LINK" value=""><object data="" type="" style="">
+  <h1 style="text-align:center;font-size: 4vw;">You browser cannot view this document.<br>
+    <a href="" download="">Download</a> it.
+  </h1>
+</object></div></div></div>
+    <div class="t-DialogRegion-buttons">
+       <div class="t-ButtonRegion t-ButtonRegion--dialogRegion">
+         <div class="t-ButtonRegion-wrap">
+           <div class="t-ButtonRegion-col t-ButtonRegion-col--left"><div class="t-ButtonRegion-buttons"></div></div>
+           <div class="t-ButtonRegion-col t-ButtonRegion-col--right"><div class="t-ButtonRegion-buttons"></div></div>
+         </div>
+       </div>
+    </div>
+  </div>
+</div></div><div class="t-NavigationBar-menu a-Menu" style="display: none" id="menu_L69964099393747307" tabindex="-1" role="menu"><ul><li data-current="false" data-icon="fa fa-question-circle-o"><a href="https://portal.lto.gov.ph/ords/f?p=PUBLIC_PORTAL:ONLINE_VALIDATION_EXAM:111429506694395:::::">CDE Online Validation Exam</a></li><li data-current="false" data-icon="fa fa-book"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:111429506694395:::HOME:P1_ELEARN_TOPICS_FK:ORC">Driver's License Renewal Course</a></li><li data-current="false" data-icon="fa fa-play-circle-o"><a href="https://portal.lto.gov.ph/ords/f?p=PUBLIC_PORTAL:VIDEO_REGISTRATION:111429506694395:::::">LTO Client ID Tutorial</a></li><li data-current="false" data-icon="fa fa-user-graduate"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:111429506694395:::1::">Driver's Manual</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:111429506694395:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A20AB72E0530D28780ACC4D">Licensing Information</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:111429506694395:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A21AB72E0530D28780ACC4D">Getting Ready to Drive</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:111429506694395:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A22AB72E0530D28780ACC4D">Driving Fundamentals</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:111429506694395:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A23AB72E0530D28780ACC4D">Road Courtesy and Safety</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:111429506694395:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A24AB72E0530D28780ACC4D">Rights, Duties and Responsibilities of Drivers</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:111429506694395:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A25AB72E0530D28780ACC4D">Motor Vehicle Registration</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:111429506694395:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A26AB72E0530D28780ACC4D">Land Transportation Related Laws</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:111429506694395:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A27AB72E0530D28780ACC4D">Fines and Penalties for Violations</a></li></ul></div><div id="pushModal" style="width: 100%; display:none; height: 100%;" class="u-DisplayNone u-Overlay--glass"></div></body></html>

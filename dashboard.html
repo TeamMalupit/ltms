@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html class="no-js  page-5000 app-PUBLIC_PORTAL gecko mac js" lang="en-us"><head>
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <title>LTMS Dashboard</title><link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+
+  <link rel="stylesheet" href="dashboard_files/Core.min_002.css" type="text/css">
+<link rel="stylesheet" href="dashboard_files/Theme-Standard.min.css" type="text/css">
+<link rel="stylesheet" href="dashboard_files/jquery-ui-apex.min.css" type="text/css">
+
+  <link rel="stylesheet" href="dashboard_files/font-apex.min.css" type="text/css">
+<link rel="stylesheet" href="dashboard_files/Core.min.css" type="text/css">
+
+<style>
+  /* Close button styling */
+  .btn-close {
+    background: #dc2626; /* Red */
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  .btn-blue {
+    background: #2563eb; /* Blue */
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  .btn-close:hover { background: #b91c1c; }
+  .btn-blue:hover { background: #1e40af; }
+  
+  /* Button row: all in one line */
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between; /* space between Close and Right group */
+    align-items: center;
+    margin-top: 15px;
+    gap: 10px;
+  }
+  
+  /* Right-side buttons grouped together */
+  .btn-right {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .modal-title {
+    text-align: left;
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+  .status-active {
+    color: #16a34a;
+    font-weight: bold;
+  }
+  
+  /* Modal backdrop */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Modal box */
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 90vw;
+    box-sizing: border-box;
+    margin-top: 150px;
+    position: relative;
+    text-align: center;
+  }
+  
+  /* Image */
+  .modal-content img.logo {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    display: block;
+  }
+  </style>
+
+  <style type="text/css">
+body {
+  background-image: url("dashboard_files/bg_crossroads.jpg")!important;
+  background-attachment: fixed;
+}
+
+body .overlay { 
+  position: fixed;
+  background-color: rgba(0,54,175,.55);
+  width: 100%;
+  height: 100%;
+}
+
+/*footer
+.t-Footer-version {
+  line-height: 69px;
+  padding-left: 19px;
+  padding-top: 6.6px
+}
+
+.footer-mid-logo {
+  float:left;
+  width:150px;
+}
+
+.t-Body-contentInner {
+	  min-height: 92vh;
+}*/
+</style>
+
+  <link rel="stylesheet" href="dashboard_files/38110691971776138.css" type="text/css">
+
+  <link rel="stylesheet" href="dashboard_files/public_portal_min.css" type="text/css">
+<link rel="stylesheet" href="dashboard_files/fixes.css" type="text/css">
+<link rel="stylesheet" href="dashboard_files/websocket_server_min.css" type="text/css">
+<link rel="stylesheet" href="dashboard_files/digital_id_min.css" type="text/css">
+
+  <style type="text/css">
+/*****/
+#top-region {
+  color: white;
+}
+
+.isDisabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+a[aria-disabled="true"] {
+  display: inline-block;  /* For IE11/ MS Edge bug */
+  pointer-events: none;
+  text-decoration: none;
+  background-color: lightblue;
+}
+
+/*.t-Alert {
+ width: 98.7%;    
+ background-color: #ffd8dc;
+}*/
+
+
+body .__bgImage {
+    background-image: url(/i/com/dermalog/dl_a_lto_common/pics/bg_crossroads.jpg)!important;
+    background-size: cover;
+    content: '';
+    position: fixed;
+    top: -10em;
+    bottom: -10em;
+    left: -10em;
+    right: -10em;
+transition:all .5s linear
+}
+
+.center-alert .t-Alert {
+    background-color: rgba(255,0,0,.2) !important;
+    color: #FFF !important;
+    text-align: left !important;
+}
+
+.t-Alert--info {
+    border: 2px solid #0572CE !important;
+}
+
+.fa[class*='fam-']:after {
+    background: radial-gradient(white 60%, transparent 40%);;
+}
+ 
+.icon-number {
+  position: absolute;
+  top: 22.5px;
+  left: 39.5px;
+  z-index: 1;
+  font-size: 27px;
+  font-weight: bolder;
+}
+
+/* Notes on Dashboard */
+@media (max-width: 450px) {
+  .dashboard .center-alert .t-Alert-icon {
+    display: none;
+  }  
+}
+
+.dashboard .center-alert p {
+  margin: 4px 0;
+}
+
+.dashboard .center-alert h5 {
+  margin: 5px 0 10px;
+}
+
+.dashboard .center-alert div.t-Alert--horizontal {
+  border-radius: 3px;
+}
+
+
+</style>
+  
+  <link rel="shortcut icon" href="https://portal.lto.gov.ph/i/com/dermalog/dl_a_lto_common/pics/favicon.ico">
+<link rel="icon" sizes="16x16" href="https://portal.lto.gov.ph/i/com/dermalog/dl_a_lto_common/pics/favicon.ico">
+<link rel="icon" sizes="32x32" href="https://portal.lto.gov.ph/i/com/dermalog/dl_a_lto_common/pics/favicon.ico">
+<link rel="apple-touch-icon" sizes="64x64" href="https://portal.lto.gov.ph/i/com/dermalog/dl_a_lto_common/pics/favicon.ico">
+  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="-1"><meta http-equiv="Cache-Control" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="t-PageBody t-PageBody--hideLeft t-PageBody--hideActions dashboard page__landing apex-top-nav apex-icons-fontapex t-PageBody--noNav page__loaded" id="t_PageBody" style=""><div class="__bgImage" style="transform: rotate3d(0.6146735990756788,0,0,-1.1467359907567876deg) rotate3d(0,0.26262000619386805,0,-2.3737999380613193deg) translateZ(80px)"></div>
+  <div id="public-advisory-container"></div>
+  <div class="overlay"></div>    
+<form action="wwv_flow.accept" method="post" name="wwv_flow" id="wwvFlowForm" novalidate="" autocomplete="off">
+<input type="hidden" name="p_flow_id" value="1200" id="pFlowId"><input type="hidden" name="p_flow_step_id" value="5000" id="pFlowStepId"><input type="hidden" name="p_instance" value="5924625441925" id="pInstance"><input type="hidden" name="p_page_submission_id" value="136108077134150101416463137064506946084" id="pPageSubmissionId"><input type="hidden" name="p_request" value="" id="pRequest"><input type="hidden" name="p_reload_on_submit" value="S" id="pReloadOnSubmit"><input type="hidden" value="136108077134150101416463137064506946084" id="pSalt">
+<header class="t-Header" id="t_Header">
+  
+  <div class="t-Header-branding">
+    <div class="t-Header-controls">
+      <button class="t-Button t-Button--icon t-Button--header t-Button--headerTree" title="Expand / Collapse Navigation" id="t_Button_navControl" type="button"><span class="t-Icon fa fa-bars" aria-hidden="true"></span></button>
+    </div>
+    <div class="t-Header-logo">
+      <a href="https://portal.lto.gov.ph/ords/f?p=1200:HOME:5924625441925:::::" class="t-Header-logo-link"><img src="dashboard_files/lto_logo.png" style="float:left;"></a>
+    </div>
+    <div class="t-Header-navBar">
+      <ul class="t-NavigationBar " id="69964099393747305"><li class="t-NavigationBar-item ">
+  <a class="t-Button t-Button--icon t-Button--header t-Button--navBar" href="javascript:void(window.open('https://lto.gov.ph/'));">
+    <span class="t-Icon fa fa-cloud"></span><span class="t-Button-label">LTO Official Webpage</span><span class="t-Button-badge"></span>
+  </a>
+</li><li class="t-NavigationBar-item ">
+  <button class="t-Button t-Button--icon t-Button t-Button--header t-Button--navBar js-menuButton" type="button" id="L69964099393747307" data-menu="menu_L69964099393747307" aria-haspopup="true" aria-expanded="false">
+      <span class="t-Icon fa fa-graduation-cap"></span><span class="t-Button-label">E-Learning</span><span class="t-Button-badge"></span><span class="a-Icon icon-down-arrow"></span>
+  </button></li><li class="t-NavigationBar-item ">
+  <a class="t-Button t-Button--icon t-Button--header t-Button--navBar" href="https://portal.lto.gov.ph/ords/f?p=PUBLIC_PORTAL:CONTACT_US:5924625441925:::::">
+    <span class="t-Icon fa fa-phone"></span><span class="t-Button-label">Contact</span><span class="t-Button-badge"></span>
+  </a>
+</li><li class="t-NavigationBar-item is-active ">
+  <a class="t-Button t-Button--icon t-Button--header t-Button--navBar" href="https://portal.lto.gov.ph/ords/f?p=PUBLIC_PORTAL:DASHBOARD:5924625441925:::::">
+      <span class="t-Icon fa fa-home"></span><span class="t-Button-label">Dashboard</span><span class="t-Button-badge"></span>
+  </a>
+</li><li class="t-NavigationBar-item has-username">
+  <button class="t-Button t-Button--icon t-Button t-Button--header t-Button--navBar js-menuButton" type="button" id="L69964099393747322" data-menu="menu_L69964099393747322" aria-haspopup="true" aria-expanded="false">
+      <span class="t-Icon fa fa-user"></span><span class="t-Button-label">Delito - 22-860102-4463907</span><span class="t-Button-badge"></span><span class="a-Icon icon-down-arrow"></span>
+  </button></li></ul>
+    </div>
+  </div>
+</header>
+    <div class="t-Body">
+  <div class="t-Body-main" style="margin-top: 68px;">
+      <div class="t-Body-title" id="t_Body_title" style="top: 68px;">
+        
+      </div>
+      <div class="t-Body-content" id="t_Body_content"><div id="t_Body_content_offset" style="height: 1px;"></div>
+        <span id="APEX_SUCCESS_MESSAGE" data-template-id="29326048649789569_S" class="apex-page-success u-hidden"></span><span id="APEX_ERROR_MESSAGE" data-template-id="29326048649789569_E" class="apex-page-error u-hidden"></span>
+        <div class="t-Body-contentInner">
+          <div class="container">
+<div class="row">
+<div class="col col-12 apex-col-auto">
+<div id="R84675782609529815" class=""> 
+<input type="hidden" id="P0_CANCEL_TEXT" name="P0_CANCEL_TEXT" value="Do you really want to Cancel?&lt;br&gt;All entered data will be deleted permanently."><input type="hidden" data-for="P0_CANCEL_TEXT" value="Avh7Dq57Q0VqPVOx_ltv3ADsC_tiC0TxHZbJhFnuJL4xftpYrm1oonhYxgubNNhBzHa5XqJcCkXkZ-DpvBC1rw"><input type="hidden" id="P0_WSS_JSON" name="P0_WSS_JSON" value="eyJjb2RlIjoiTk9UX0lOU1RBTExFRCIsIm1zZyI6IlRoZSB3ZWJzb2NrZXQgc2Vy
+dmVyIGlzIGVpdGhlciBub3QgaW5zdGFsbGVkIG9yIG5vdCBydW5uaW5nLiIsIm9m
+ZmljZV9uYW1lIjpudWxsLCJ3c3NfdmVyc2lvbiI6bnVsbCwib2ZmaWNlX2NvZGUi
+Om51bGwsIndzc19zdGF0ZSI6bnVsbCwiY29tcHV0ZXJfdHlwZSI6IiIsIndzc19s
+aW5rIjpudWxsfQ=="><input type="hidden" id="P0_WMT_D" name="P0_WMT_D" value=""><input type="hidden" data-for="P0_WMT_D" value="OnHqnKOIpUffPbt6kWiYf8b0jU-7koJrDWbFBXcOtIF77NHrfljxqTqQm_8lal0f01b9a4dYqhuLHa2Ahx0wTA"><input type="hidden" id="P0_WMA_D" name="P0_WMA_D" value=""><input type="hidden" data-for="P0_WMA_D" value="MIRybOhfu9sY3zLKthQsUurXCxwtfJHfKM2F0dTMA6Gp5GgIgphZDx0_jhSr9DmSjp-Mk2GJzHTLNGuYZg8Mng"><input type="hidden" id="P0_WMD_D" name="P0_WMD_D" value=""><input type="hidden" data-for="P0_WMD_D" value="gkyoKGcPVnPrVG2w92NH5pXum6Qb1Xj5CL_JM9sbhHZ8ZW9tJBFEdCoYOC7oZ-ClnNWE3WPTdP4BTXdEGWsDJQ"><input type="hidden" id="P0_WMR_D" name="P0_WMR_D" value=""><input type="hidden" data-for="P0_WMR_D" value="8CWgbuOLygovh-gA_7i2w0L6t-lu26-5dF1AjShAVQlaIfhBQzWXs66R886-VccyOkIEgHe7Rg1KHge6BRsj2Q"><input type="hidden" id="P0_W_DLS_DONE" name="P0_W_DLS_DONE" value=""><input type="hidden" data-for="P0_W_DLS_DONE" value="Q3xU_m3ooix88EWiG47ZZssKgzP7Oo6FTtVLC1lqsxkclnzUtNHXEWEOtfQHgORF_Wgz-KaYg4OhDWvEVKFZxQ"><input type="hidden" id="P0_W_RESC_APPO_DONE" name="P0_W_RESC_APPO_DONE" value=""><input type="hidden" data-for="P0_W_RESC_APPO_DONE" value="MvO-C1NqpjsdoFrZFvY3hK4yKbXMLRw7m4kuhvkcDzaYIrkzdH4w0v4E18JZRzpB6xyz2pB9Yw5VXJMROP5cIA"><script>
+  const logoutObj = {
+    reloadUrl4Idle : `${location.protocol}/${location.host}/ords/apex_authentication.logout?p_app_id=1200&p_session_id=5924625441925`
+  , reloadUrl4Life : `${location.protocol}/${location.host}/ords/apex_authentication.logout?p_app_id=1200&p_session_id=5924625441925`
+  };
+</script>
+</div>
+</div>
+</div><div class="row">
+<div class="col col-12 ">
+<div class="t-Region __intro  t-Region--removeHeader t-Region--noBorder t-Region--scrollBody margin-top-none margin-bottom-none margin-left-none margin-right-none" id="#content">
+ <div class="t-Region-header">
+  <div class="t-Region-headerItems t-Region-headerItems--title">
+    <span class="t-Region-headerIcon"><span class="t-Icon " aria-hidden="true"></span></span>
+    <h2 class="t-Region-title" id="#content_heading">Content</h2>
+  </div>
+  <div class="t-Region-headerItems t-Region-headerItems--buttons"><span class="js-maximizeButtonContainer"></span></div>
+ </div>
+ <div class="t-Region-bodyWrap">
+   <div class="t-Region-buttons t-Region-buttons--top">
+    <div class="t-Region-buttons-left"></div>
+    <div class="t-Region-buttons-right"></div>
+   </div>
+   <div class="t-Region-body">
+     <input type="hidden" id="P5000_DLS_NEW_CNT" name="P5000_DLS_NEW_CNT" value="0"><input type="hidden" data-for="P5000_DLS_NEW_CNT" value="UXMw8qp2ncJAguNhmF13oh3F_zKh49NpaSBBX1RgOY5c7ADx2wmjiOR8tHSVkUwo5JUoJ78TRBjW53xxui_9ZA"><input type="hidden" id="P5000_DLS_PENDING_CNT" name="P5000_DLS_PENDING_CNT" value="1"><input type="hidden" data-for="P5000_DLS_PENDING_CNT" value="QE9d7Ec62rWhng8HBAfv_kNCYt_Bx2NAB7SAzJ9I-SbWB_e-86ILu04miPzheUhGK9TpiBoQsoLYhZ5vZsfziw"><input type="hidden" id="P5000_MVIRS_NEW_CNT" name="P5000_MVIRS_NEW_CNT" value="0"><input type="hidden" data-for="P5000_MVIRS_NEW_CNT" value="zFwZTFiuHaoGJl7OiZhRCSFSmLgYzT-c2xcpSMzUy4Wq6yBkM1snXgMZNnieaMCIBY9ZeiGybfVwlLZUGH43fg"><input type="hidden" id="P5000_MVIRS_PENDING_CNT" name="P5000_MVIRS_PENDING_CNT" value="0"><input type="hidden" data-for="P5000_MVIRS_PENDING_CNT" value="UBLgQpJd0uYNv4YddtcR8f5a-WzCZV6rXeEzP-7k3QmLHkHmxpYJXXST68pl-pjnvvLu0-0JCoMahBdal4KKiw"><input type="hidden" id="P5000_OPEN_GM_CNT" name="P5000_OPEN_GM_CNT" value="1"><input type="hidden" data-for="P5000_OPEN_GM_CNT" value="zNKtL_PVgfVhX8fwsSUUSxw8DKenLm5W20tfsEhGhF9B1PJt-s5FllTidnz9USFTj9BoW7sulV_9dOykT4jzjQ"><input type="hidden" id="P5000_PAYMENT_FK" name="P5000_PAYMENT_FK" value=""><input type="hidden" data-for="P5000_PAYMENT_FK" value="L2ggQflTd_JY97qX6VS0NVT6skD2lIgGk___DFvVtoQngYVfB2T5LdlQ9b-Gydp7zbVEJwmlwafgCnwyjoS6Qg"><input type="hidden" id="P5000_COMPANY_ROLE" name="P5000_COMPANY_ROLE" value=""><input type="hidden" data-for="P5000_COMPANY_ROLE" value="UYSXl6uy8xusm3IEp3SIDK2DA-VklVIlAs1HRxPfhf1vFwsifia-GF4n_f1C9BqAwHe1y6e170pPumKNc_QLOA"><div id="hiddenPublicAdvisory" style="display:none"></div>
+     <div class="container">
+<div class="row">
+<div class="col col-12 ">
+<div id="R28982172753479175" class="margin-top-lg margin-bottom-none"> 
+<div class="container">
+<div class="row">
+<div class="col col-12 apex-col-auto">
+<div id="R25887673432157944" class=""> 
+<img class="logo" src="dashboard_files/lto_logo.png" alt="LTO Portal" height="175" width="175">
+</div>
+</div>
+</div><div class="row">
+<div class="col col-12 apex-col-auto">
+<div id="R108473124386668642" class="__greeting"> 
+<h1>Welcome, <strong>Arthur</strong></h1>
+<h3>What would you like to do?</h3>
+
+</div>
+</div>
+</div><div class="row">
+<div class="col col-1 ">
+<span class="apex-grid-nbsp">&nbsp;</span>
+</div><div class="col col-10 ">
+<div id="R77315553368563577" class=""> 
+
+</div>
+</div>
+</div><div class="row">
+<div class="col col-12 apex-col-auto">
+<div id="R21271210909905849" class="margin-left-none margin-right-none"> 
+<ul class="t-Cards __iconNav  u-colors t-Cards--displaySubtitle t-Cards--featured force-fa-lg t-Cards--displayIcons t-Cards--stacked t-Cards--hideBody t-Cards--animColorFill"><li class="t-Cards-item ">
+  
+  <li class="t-Cards-item">
+    <div class="t-Card">
+      <a href="#" id="openModal" class="t-Card-wrap">
+        <div class="t-Card-icon u-color">
+          <span class="t-Icon fas fa-podcast"></span>
+        </div>
+        <div class="t-Card-titleWrap">
+          <h3 class="t-Card-title">Digital ID</h3>
+        </div>
+      </a>
+    </div>
+  </li>
+  <li class="t-Cards-item">
+    <div class="t-Card">
+      <a href="#" id="openModal" class="t-Card-wrap">
+        <div class="t-Card-icon u-color">
+          <span class="t-Icon fas fa-id-card"></span>
+        </div>
+        <div class="t-Card-titleWrap">
+          <h3 class="t-Card-title">Licensing</h3>
+        </div>
+      </a>
+    </div>
+  </li>
+  <li class="t-Cards-item">
+    <div class="t-Card">
+      <a href="#" id="openModal" class="t-Card-wrap">
+        <div class="t-Card-icon u-color">
+          <span class="t-Icon fas fa-car"></span>
+        </div>
+        <div class="t-Card-titleWrap">
+          <h3 class="t-Card-title">Vehicle</h3>
+        </div>
+      </a>
+    </div>
+  </li>
+  <li class="t-Cards-item">
+    <div class="t-Card">
+      <a href="#" id="openModal" class="t-Card-wrap">
+        <div class="t-Card-icon u-color">
+          <span class="t-Icon fas fa-book"></span>
+        </div>
+        <div class="t-Card-titleWrap">
+          <h3 class="t-Card-title">Transactions</h3>
+        </div>
+      </a>
+    </div>
+  </li>
+  <li class="t-Cards-item">
+    <div class="t-Card">
+      <a href="#" id="openModal" class="t-Card-wrap">
+        <div class="t-Card-icon u-color">
+          <span class="t-Icon fas fa-building"></span>
+        </div>
+        <div class="t-Card-titleWrap">
+          <h3 class="t-Card-title">Violations</h3>
+        </div>
+      </a>
+    </div>
+  </li>
+  <li class="t-Cards-item">
+    <div class="t-Card">
+      <a href="#" id="openModal" class="t-Card-wrap">
+        <div class="t-Card-icon u-color">
+          <span class="t-Icon fas fa-file-text"></span>
+        </div>
+        <div class="t-Card-titleWrap">
+          <h3 class="t-Card-title">Documents</h3>
+        </div>
+      </a>
+    </div>
+  </li>
+  <li class="t-Cards-item">
+    <div class="t-Card">
+      <a href="#" id="openModal" class="t-Card-wrap">
+        <div class="t-Card-icon u-color">
+          <span class="t-Icon fas fa-user"></span>
+        </div>
+        <div class="t-Card-titleWrap">
+          <h3 class="t-Card-title">Profile</h3>
+        </div>
+      </a>
+    </div>
+  </li>
+
+  
+</li></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+   </div>
+   <div class="t-Region-buttons t-Region-buttons--bottom">
+    <div class="t-Region-buttons-left"></div>
+    <div class="t-Region-buttons-right"></div>
+   </div>
+ </div>
+</div>
+
+</div>
+</div><div class="row">
+<div class="col col-12 apex-col-auto">
+<div id="reg-digital-id_parent">
+<div style="display:none"></div>
+</div>
+</div>
+</div><div class="row">
+<div class="col col-12 apex-col-auto">
+<div id="reg-print-document_parent">
+<div style="display:none"></div>
+</div>
+</div>
+</div>
+</div>
+        <div class="mid-logo-container">
+          <img src="dashboard_files/lto_mid_logo_white_small.png">;
+        </div>
+        </div>
+        <footer class="t-Footer">
+          <div class="t-Footer-body">
+            <div class="t-Footer-content"></div>
+            <div class="t-Footer-apex">
+              <div class="t-Footer-version"><span class="fa fa-package" aria-hidden="true"></span> Release 2.5.4</div>
+              <div class="walk-in-terminal"></div>
+              <div class="page-visits"><span class="fa fa-user" aria-hidden="true"></span>      892,527,112 page visits</div>
+              <div class="t-Footer-customize"></div>
+              
+            </div>
+          </div>
+          <div class="t-Footer-top">
+            <a href="#top" class="t-Footer-topButton" id="t_Footer_topButton" title="Start of page"><span class="a-Icon icon-up-chevron"></span></a>
+          </div>
+        </footer>
+      </div>
+  </div>
+</div>
+<div class="t-Body-inlineDialogs">
+  
+</div><input type="hidden" id="pPageItemsRowVersion" value=""><input type="hidden" id="pPageItemsProtected" value="9ZePm_9ID0cC1VvHnznFIVSJIO0IhTUTg7xZC2pLMcSaXEeWo5F4ESzMQDgwPb6uQ8_EKDZt4hzyB2mwhHLjPKKqDmuzxbyf3OmBXNX88dgA73f_DOvs21LfflHy_04Sxk8Mg4uDNan1qCYhQes6NEv7OJ2FVGrZOCnE5JkSPy-pOVtAFuH0lVjz7ygcFDUoQvLEvZdxVkj3EjAzWiNq9pQiRj3akKzow_sA2Oag2q6qZcC164sx6mnNpnwE-ohuIOHmMGHBk2gOZRtf33paVS7zlm9j2mQwI3pr37LjSMY"></form>
+
+
+<script>
+var apex_img_dir = "/i/", htmldb_Img_Dir = apex_img_dir;
+</script>
+<script src="dashboard_files/desktop_all.min.js"></script>
+<script src="dashboard_files/wwv_flow.js"></script>
+
+<script type="text/javascript">
+apex.da.initDaEventList = function(){
+apex.da.gEventList = [
+{"bindEventType":"ready","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ dermalog.dl_a_public_portal.websocketServer.register(
+  false,  //forceUpdate
+  false,   //showWSSIconAlways
+  true,   //showTypeText, 
+  true,   //showIssueText, 
+  true,   //showOfficeNameText
+);
+},"action":"NATIVE_JAVASCRIPT_CODE"}]},
+{"bindEventType":"ready","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ // set session timeout to logout url
+//dermalog.dl_common.sessionTimeoutObserver.Init(true, {});
+
+// set session timeout to logout url
+dermalog.dl_common.sessionTimeoutObserver.Init(true, logoutObj);
+},"action":"NATIVE_JAVASCRIPT_CODE"}]},
+{"bindEventType":"ready","anyActionsFireOnInit":false,actionList:[{"eventResult":true,"executeOnPageInit":false,"stopExecutionOnError":true,javascriptFunction:function (){ dermalog.dl_a_public_portal.digital_id.initDigitlIdModal(`36722060,D0616001874,4,Active,DLS,2,N,Driver's License`);
+},"action":"NATIVE_JAVASCRIPT_CODE"}]}];
+}
+</script>
+
+<script src="dashboard_files/widget.stickyWidget.min.js"></script>
+<script src="dashboard_files/theme42.min.js"></script>
+
+
+<script src="dashboard_files/browser_detect.js"></script>
+<script src="dashboard_files/add_icon.js"></script>
+<script src="dashboard_files/namespaces_002.js"></script>
+<script src="dashboard_files/namespaces_003.js"></script>
+<script src="dashboard_files/utils.js"></script>
+<script src="dashboard_files/namespaces.js"></script>
+<script src="dashboard_files/apps.js"></script>
+<script src="dashboard_files/namespace.js"></script>
+<script src="dashboard_files/namespace_003.js"></script>
+<script src="dashboard_files/page_min.js"></script>
+<script src="dashboard_files/messages_min.js"></script>
+<script src="dashboard_files/websocket_server_min.js"></script>
+<script src="dashboard_files/qrcode.min.js"></script>
+<script src="dashboard_files/digital_id_min.js"></script>
+<script src="dashboard_files/documents_min.js"></script>
+<script src="dashboard_files/namespace_002.js"></script>
+<script src="dashboard_files/dms_min.js"></script>
+
+<script type="text/javascript">
+//------------------------------------------------------------------------------
+function checkSize(cnt,$icon) {
+  if(cnt > 9) {
+    $icon.find('.icon-number').css('left','33px');
+    return '9+';
+  }
+  return cnt;
+}
+//------------------------------------------------------------------------------
+/*function createDlsReminder() {
+  var newCnt = apex.item('P5000_DLS_NEW_CNT').getValue(); 
+  var pendingCnt = apex.item('P5000_DLS_PENDING_CNT').getValue(); 
+  var cnt = parseInt(newCnt) + parseInt(pendingCnt);
+  var $icon = $('.fa-drivers-license-o');
+
+  if(cnt != 0) {
+   $icon.addClass('fam-is-success fam-blank')
+        .append('<span class="icon-number"></span>')
+        .find('.icon-number') 
+        .html(checkSize(cnt,$icon))
+   
+  }
+}*/
+//------------------------------------------------------------------------------
+/*function createMvirsReminder() {
+  var newCnt = apex.item('P5000_MVIRS_NEW_CNT').getValue(); 
+  var pendingCnt = apex.item('P5000_MVIRS_PENDING_CNT').getValue(); 
+  var cnt = parseInt(newCnt) + parseInt(pendingCnt);    
+  var $icon = $('.fa-car');
+
+  if(cnt != 0) {
+   $icon.addClass('fam-is-success fam-blank')
+        .append('<span class="icon-number"></span>')
+        .find('.icon-number') 
+        .html(checkSize(cnt,$icon))
+  }
+}*/
+//------------------------------------------------------------------------------
+/*function createLetasReminder() {
+  var newCnt = apex.item('P5000_LETAS_NEW_CNT').getValue(); 
+  var pendingCnt = apex.item('P5000_LETAS_PENDING_CNT').getValue(); 
+  var cnt = parseInt(newCnt) + parseInt(pendingCnt);
+  var $icon = $('.fa-file-o');
+    
+  if(cnt != 0) {
+  $icon.addClass('fam-is-success fam-blank')
+       .append('<span class="icon-number"></span>')
+       .find('.icon-number') 
+       .html(checkSize(cnt,$icon))
+  }
+}*/
+//------------------------------------------------------------------------------
+/*function createViolationsReminder() {
+  var cnt = apex.item('P5000_VIOLATIONS_CNT').getValue(); 
+  var $icon = $('.fa-university')
+      
+  if(cnt != 0) {
+   $icon.addClass('fam-is-success fam-blank')
+        .append('<span class="icon-number"></span>')
+        .find('.icon-number') 
+        .html(checkSize(cnt,$icon))
+   return;
+  }
+}*/
+//------------------------------------------------------------------------------
+function createGmReminder() {
+  var cnt = apex.item('P5000_OPEN_GM_CNT').getValue(); 
+  var $icon = $('.fa-clipboard-list')
+      
+  if(cnt != 0) {
+   $icon.addClass('fam-is-success fam-blank')
+        .append('<span class="icon-number"></span>')
+        .find('.icon-number') 
+        .html(checkSize(cnt,$icon))
+   return;
+  }
+}
+</script>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+
+
+
+
+<script type="text/javascript">
+apex.jQuery( function() {
+apex.page.init( this, function() {
+apex.jQuery.when.apply( apex.jQuery, apex.page.loadingDeferreds ).done(function() {
+try {
+(function(){apex.da.initDaEventList();})();
+(function(){apex.da.init();})();
+apex.theme42.initializePage.noSideCol();
+$('.page__landing').addClass('page__loaded');
+$('.page__landing').removeClass('page__loading');
+$('.page__landing').prepend('<div class="__bgImage"></div>');
+var rotate = 0;
+var rotateMax = 5; 
+
+
+$(document).on('mousemove', 'body',function(e){
+        var offset = $(this).offset();
+        var relativeX = (e.pageX - offset.left);
+        var relativeY = (e.pageY - offset.top);
+	var yRotate =  relativeX/$(this).width();
+	var xRotate =  relativeY/$(this).height();
+	if(rotate < rotateMax){
+		rotate ++
+		}
+	var yRotatestaerke = rotate*(2*yRotate-1)
+	var xRotatestaerke = -(rotate*(2*xRotate-1))
+	/*$(this).children('.__bgImage').attr('style', 'transform: translate('+xRotate*yRotatestaerke+'em,'+yRotate*xRotatestaerke+'em)');
+*/
+	$(this).children('.__bgImage').attr('style', 'transform: rotate3d('+xRotate+',0,0,'+xRotatestaerke+'deg) rotate3d(0,'+yRotate+',0,'+yRotatestaerke+'deg) translateZ(80px)')
+}) 
+
+
+
+// Append DLS Icon with reminder
+//createDlsReminder();
+
+// Append MVIRS Icon with reminder
+//createMvirsReminder();
+
+// Append Documents Icon with reminder
+//createLetasReminder();
+
+// Append Violations Icon with reminder
+//createViolationsReminder();
+
+// Append Violations Icon with reminder
+createGmReminder();
+apex.page.warnOnUnsavedChanges();
+} finally {
+apex.event.trigger(apex.gPageContext$,'apexreadyend');
+}
+});
+});
+});</script>
+
+
+
+
+
+<div style="height: 772.617px !important; top: 432.992px; left: 807.5px; display: none;" tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog--inline dialog-show-picture" aria-describedby="reg-digital-id" aria-labelledby="ui-id-1"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix"><span id="ui-id-1" class="ui-dialog-title"><span class="iconPlaceholder t-Icon fa fa-certificate"></span>Digital ID <span class="license-status"> is <span class="lto_green">Active</span></span></span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button></div><div id="reg-digital-id" class="t-DialogRegion js-modal js-dialog-size720x480 js-regionDialog ui-dialog-content ui-widget-content" style="width: auto; min-height: 0px; max-height: none; height: 725px;">
+  <div class="t-DialogRegion-wrap">
+    <div class="t-DialogRegion-bodyWrapperOut"><div class="t-DialogRegion-bodyWrapperIn"><div class="t-DialogRegion-body"><div class="container">
+<div class="row" style="">
+<div class="col col-12 apex-col-auto">
+<div id="reg-digital-id-picture" class=""> 
+<div class="qr-box" style="display: none;">
+  <div id="qrcode" title="https://portal.lto.gov.ph/ords/f?p=PUBLIC_PORTAL:DIV:::::P202_P,P202_V:36722060,7F7638FB30926C9D0BE584AC2261EA7CD001782B">
+  <canvas width="602" height="602" style="display: none;"></canvas><img style="display: block;" src="">test</div>
+</div>
+
+
+
+<div class="wait-box" style="display: none;">
+  <span class="u-Processing custom-spinner" role="alert">
+     <span class="u-Processing-spinner"></span>
+     <div class="spinner-wait-text">LOADING DIGITAL ID</div>
+  </span>
+</div>
+
+<div class="scene license-container" style="">
+  <div class="card is-flipped">
+    <div class="card__face card__face--front">
+      <canvas id="canvas-front" width="940" height="602"></canvas>
+    </div>
+    <div class="card__face card__face--back">
+      <canvas id="canvas-back" width="940" height="602"></canvas>
+    </div>
+  </div>
+</div><table summary="" cellspacing="0" cellpadding="0" border="0" width="100%" style="display: none;"><tbody><tr><td align="right"><button class="t-Button t-Button--noLabel t-Button--icon t-Button--link" onclick="void(0);" type="button" id="btn-close-digital-id-ls" title="Close" aria-label="Close"><span class="t-Icon fa fa-times-circle-o fa-2x" aria-hidden="true"></span></button><button class="t-Button t-Button--noLabel t-Button--icon t-Button--link" onclick="void(0);" type="button" id="btn-flip-digital-id-ls" title="Show Backside" aria-label="Show Backside" style=""><span class="t-Icon fa fa-2x fa-exchange" aria-hidden="true"></span></button><button class="t-Button t-Button--noLabel t-Button--icon t-Button--link" onclick="void(0);" type="button" id="btn-qr-digital-id-ls" title="Close" aria-label="Close" style=""><span class="t-Icon fa fa-qrcode fa-2x" aria-hidden="true"></span></button><button class="t-Button t-Button--noLabel t-Button--icon t-Button--link" onclick="void(0);" type="button" id="btn-back-digital-id-ls" title="Close" aria-label="Close" style="display: none;"><span class="t-Icon fa fa-chevron-left fa-2x" aria-hidden="true"></span></button></td></tr></tbody></table>
+</div>
+</div>
+</div><div class="row" style="display: none;">
+<div class="col col-12 apex-col-auto">
+<div id="reg-digital-id-list" class=""> 
+<ul class="t-Cards u-colors t-Cards--featured t-Cards--block force-fa-lg t-Cards--displayIcons t-Cards--float t-Cards--desc-2ln t-Cards--animColorFill"><li class="t-Cards-item ">
+  <div class="t-Card">
+    <a href="javascript:dermalog.dl_a_public_portal.digital_id.showDigitalId('36722060', 4)" class="t-Card-wrap">
+      <div class="t-Card-icon u-color "><span class="t-Icon fa fa-id-card-o fa-lg"><span class="t-Card-initials" role="presentation"></span></span></div>
+      <div class="t-Card-titleWrap"><h3 class="t-Card-title">Driver's License</h3><h4 class="t-Card-subtitle"></h4></div>
+      <div class="t-Card-body">
+        <div class="t-Card-desc"></div>
+        <div class="t-Card-info">D06-16-001874</div>
+      </div>
+      <span class="t-Card-colorFill u-color "></span>
+    </a>
+  </div>
+</li></ul>
+</div>
+</div>
+</div><div class="row" style="display: none;">
+<div class="col col-12 apex-col-auto">
+<!-- <div class="t-Alert t-Alert--colorBG t-Alert--horizontal t-Alert--defaultIcons t-Alert--info" id="reg-digital-id-error">
+  <!-- <div class="t-Alert-wrap">
+    <div class="t-Alert-icon">
+      <span class="t-Icon "></span>
+    </div>
+    <div class="t-Alert-content">
+      <div class="t-Alert-header">
+        <h2 class="t-Alert-title" id="reg-digital-id-error_heading">Digital ID can not be generated</h2>
+      </div>
+      <div class="t-Alert-body"><div class="error-reason">
+</div></div>
+    </div>
+    <div class="t-Alert-buttons"></div>
+  </div> -->
+</div> -->
+</div>
+</div>
+</div></div></div></div>
+<img class="logo" src="dashboard_files/id_arthur.jpg" alt="LTO Portal" height="450">
+    <div class="t-DialogRegion-buttons">
+       <div class="t-ButtonRegion t-ButtonRegion--dialogRegion">
+         <div class="t-ButtonRegion-wrap">
+           <div class="t-ButtonRegion-col t-ButtonRegion-col--left"><div class="t-ButtonRegion-buttons"><button class="t-Button t-Button--noLabel t-Button--icon " onclick="void(0);" type="button" id="btn-back-digital-id" title="Back" aria-label="Back" style="display: none;"><span class="t-Icon fa fa-chevron-left" aria-hidden="true"></span></button><button onclick="void(0);" class="t-Button t-Button--danger" type="button" id="btn-close-digital-id"><span class="t-Button-label">Close</span></button></div></div>
+           <div class="t-ButtonRegion-col t-ButtonRegion-col--right"><div class="t-ButtonRegion-buttons"><button class="t-Button t-Button--icon t-Button--iconLeft t-Button--hot" onclick="void(0);" type="button" id="btn-flip-digital-id" style=""><span class="t-Icon t-Icon--left fa fa-exchange" aria-hidden="true"></span><span class="t-Button-label">Frontside</span><span class="t-Icon t-Icon--right fa fa-exchange" aria-hidden="true"></span></button><button class="t-Button t-Button--icon t-Button--iconLeft t-Button--hot" onclick="void(0);" type="button" id="btn-qr-digital-id" style=""><span class="t-Icon t-Icon--left fa fa-qrcode" aria-hidden="true"></span><span class="t-Button-label">QR Code</span><span class="t-Icon t-Icon--right fa fa-qrcode" aria-hidden="true"></span></button></div></div>
+         </div>
+       </div>
+    </div>
+  </div>
+</div></div><div style="display: none; position: fixed;" tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog--inline" aria-describedby="reg-print-document" aria-labelledby="ui-id-2"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix"><span id="ui-id-2" class="ui-dialog-title">Print Document</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button></div><div id="reg-print-document" class="t-DialogRegion js-modal js-dialog-size720x480 js-regionDialog ui-dialog-content ui-widget-content" style="">
+  <div class="t-DialogRegion-wrap">
+    <div class="t-DialogRegion-bodyWrapperOut"><div class="t-DialogRegion-bodyWrapperIn"><div class="t-DialogRegion-body"><input type="hidden" id="P0_DOC_LINK" name="P0_DOC_LINK" value=""><object data="" type="" style="">
+  <h1 style="text-align:center;font-size: 4vw;">You browser cannot view this document.<br>
+    <a href="" download="">Download</a> it.
+  </h1>
+</object></div></div></div>
+    <div class="t-DialogRegion-buttons">
+       <div class="t-ButtonRegion t-ButtonRegion--dialogRegion">
+         <div class="t-ButtonRegion-wrap">
+           <div class="t-ButtonRegion-col t-ButtonRegion-col--left"><div class="t-ButtonRegion-buttons"></div></div>
+           <div class="t-ButtonRegion-col t-ButtonRegion-col--right"><div class="t-ButtonRegion-buttons"></div></div>
+         </div>
+       </div>
+    </div>
+  </div>
+</div></div><div class="t-NavigationBar-menu a-Menu" style="display: none" id="menu_L69964099393747307" tabindex="-1" role="menu"><ul><li data-current="false" data-icon="fa fa-question-circle-o"><a href="https://portal.lto.gov.ph/ords/f?p=PUBLIC_PORTAL:ONLINE_VALIDATION_EXAM:5924625441925:::::">CDE Online Validation Exam</a></li><li data-current="false" data-icon="fa fa-book"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:5924625441925:::HOME:P1_ELEARN_TOPICS_FK:ORC">Driver's License Renewal Course</a></li><li data-current="false" data-icon="fa fa-play-circle-o"><a href="https://portal.lto.gov.ph/ords/f?p=PUBLIC_PORTAL:VIDEO_REGISTRATION:5924625441925:::::">LTO Client ID Tutorial</a></li><li data-current="false" data-icon="fa fa-user-graduate"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:5924625441925:::1::">Driver's Manual</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:5924625441925:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A20AB72E0530D28780ACC4D">Licensing Information</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:5924625441925:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A21AB72E0530D28780ACC4D">Getting Ready to Drive</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:5924625441925:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A22AB72E0530D28780ACC4D">Driving Fundamentals</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:5924625441925:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A23AB72E0530D28780ACC4D">Road Courtesy and Safety</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:5924625441925:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A24AB72E0530D28780ACC4D">Rights, Duties and Responsibilities of Drivers</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:5924625441925:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A25AB72E0530D28780ACC4D">Motor Vehicle Registration</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:5924625441925:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A26AB72E0530D28780ACC4D">Land Transportation Related Laws</a></li><li data-current="false" data-icon="fa fa-caret-right"><a href="https://portal.lto.gov.ph/ords/f?p=ELEARNING:HOME:5924625441925:::HOME:P1_ELEARN_TOPICS_FK:A9EDD4DC2A27AB72E0530D28780ACC4D">Fines and Penalties for Violations</a></li></ul></div><div class="t-NavigationBar-menu a-Menu" style="display: none" id="menu_L69964099393747322" tabindex="-1" role="menu"><ul><li data-current="false" data-icon="fa fa-sign-out"><a href="https://portal.lto.gov.ph/ords/apex_authentication.logout?p_app_id=1200&amp;p_session_id=5924625441925">Log Out</a></li></ul></div><div id="pushModal" style="width: 100%; display:none; height: 100%;" class="u-DisplayNone u-Overlay--glass"></div>
+
+<div id="myModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2 class="modal-title">
+      Digital ID is <span class="status-active">Active</span>
+    </h2>
+    <div>
+      <img class="logo" 
+           src="dashboard_files/front_arthur.jpg" 
+           alt="LTO Portal" 
+           height="450"
+           data-front="dashboard_files/front_arthur.jpg"
+           data-back="dashboard_files/back_arthur.jpg">
+    </div>
+
+    <!-- Buttons in one line -->
+    <div class="modal-buttons">
+      <button class="btn-close">Close</button>
+      <div class="btn-right">
+        <button class="btn-blue" id="btnBackside">Backside</button>
+        <button class="btn-blue">QR Code</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body></html>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$(function(){
+  function adjustModalWidth() {
+    const img = $('.modal-content img.logo')[0];
+    const modal = $('.modal-content');
+
+    if (!img) return;
+    // Use natural width but cap at 90% of viewport width
+    let width = img.naturalWidth || img.width;
+    const maxWidth = $(window).width() * 0.9;
+    if (width > maxWidth) width = maxWidth;
+
+    modal.css('width', width + 'px');
+  }
+
+  // Adjust width when image is loaded and on window resize
+  $('.modal-content img.logo').on('load', adjustModalWidth);
+  $(window).on('resize', adjustModalWidth);
+
+  // Open modal
+  $('#openModal').on('click', function(e){
+    e.preventDefault();
+    $('#myModal').fadeIn(200, adjustModalWidth);
+  });
+
+  // Close modal (× or outside click)
+  $('.close, #myModal').on('click', function(e){
+    if ($(e.target).is('.close') || $(e.target).is('#myModal')) {
+      $('#myModal').fadeOut(200);
+    }
+  });
+
+  // Toggle backside image
+  $('#btnBackside').on('click', function(){
+    const img = $('.modal-content img.logo');
+    const front = img.data('front');
+    const back = img.data('back');
+    const current = img.attr('src');
+
+    if(current === front){
+      img.attr('src', back);
+      $(this).text('Backside');
+    } else {
+      img.attr('src', front);
+      $(this).text('Backside');
+    }
+  });
+
+  // Close modal using red Close button
+  $('.btn-close').on('click', function(){
+    $('#myModal').fadeOut(200);
+  });
+});
+</script>
+
+
+
+
